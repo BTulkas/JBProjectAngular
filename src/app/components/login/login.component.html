@@ -1,0 +1,18 @@
+<div>
+    <form [formGroup]="loginForm">
+        <label>Email</label>
+        <input type="email" formControlName="email"/>
+        <br/><br/>
+        <label>Password</label>
+        <input type="password" formControlName="password">
+        <br/><br/>
+        <label>Login as</label>
+        <select id="client" formControlName="client">
+            <option value="Customer" selected>Customer</option>
+            <option value="Company">Company</option>
+            <option value="Administrator">Admin</option>
+        </select>
+        <br/><br/>
+        <button (click)="login()">Login</button>
+    </form>
+</div>

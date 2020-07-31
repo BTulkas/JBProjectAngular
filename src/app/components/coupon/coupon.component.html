@@ -1,0 +1,14 @@
+<!-- if statement prevents attempts to show coupon before data is finished loading-->
+<ul *ngIf="coupon.company">
+    <li>{{ coupon.title }}</li>
+    <li>By: {{ coupon.company.name }}</li>
+    <li>In Category: {{ coupon.category }}</li>
+    <li>Details: {{ coupon.description }}</li>
+    <li>Starts: {{ coupon.startDate }}</li>
+    <li>Expiration: {{ coupon.endDate }}</li>
+    <li>Only {{ coupon.amount }} left in stock!</li>
+    <li>For only {{ coupon.price }}</li>
+    <li *ngIf="isCustomer() && parentName=='browse'" ><button (click)="purchase()">BUY NOW!</button></li>
+    <li *ngIf="isCompany() && parentName=='companyCoupons'" ><button (click)="goToEdit()">Edit</button></li>
+</ul>
+

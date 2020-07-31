@@ -1,0 +1,24 @@
+<div *ngIf="company">
+    <form [formGroup]="editCompanyForm">
+        <label>ID</label><br/>
+        <input type="number" formControlName="companyId"><br/><br/>
+        
+        <label>Name</label><br/>
+        <input type="text" formControlName="name"><br/><br/>
+        
+        <label>Email</label><br/>
+        <input type="email" formControlName="email">
+        <span *ngIf="editCompanyForm.controls['email'].invalid && editCompanyForm.controls['email'].touched">
+            Need a valid email
+        </span><br/><br/>
+        
+        <label>New Password</label><br/>
+        <input type="password" formControlName="password">
+        <span *ngIf="editCompanyForm.controls['password'].invalid && editCompanyForm.controls['password'].touched">
+            Password can't be blank
+        </span><br/><br/>
+       
+        <button (click)="updateCompany()">Save Changes</button><br/><br/>
+        <button (click)="deleteCompany()">Delete</button>
+    </form>
+</div>

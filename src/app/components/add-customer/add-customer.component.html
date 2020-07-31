@@ -1,0 +1,29 @@
+<div>
+    <form [formGroup]="addCustomerForm">
+        <label>First Name</label><br/>
+        <input type="text" formControlName="firstName">
+        <span *ngIf="addCustomerForm.controls['firstName'].invalid && addCustomerForm.controls['firstName'].touched">
+            A man needs a name
+        </span><br/><br/>
+        
+        <label>Last Name</label><br/>
+        <input type="text" formControlName="lastName">
+        <span *ngIf="addCustomerForm.controls['lastName'].invalid && addCustomerForm.controls['lastName'].touched">
+            A man needs a full name
+        </span><br/><br/>
+        
+        <label>Email</label><br/>
+        <input type="email" formControlName="email">
+        <span *ngIf="addCustomerForm.controls['email'].invalid && addCustomerForm.controls['email'].touched">
+            That is not an email
+        </span><br/><br/>
+        
+        <label>Password</label><br/>
+        <input type="password" formControlName="password">
+        <span *ngIf="addCustomerForm.controls['password'].invalid && addCustomerForm.controls['password'].touched">
+            You can't have a blank password...
+        </span><br/><br/>
+        
+        <button (click)="addCustomer()">Add</button>
+    </form>
+</div>

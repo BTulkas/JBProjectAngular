@@ -1,0 +1,8 @@
+<p *ngIf="!coupons || !coupons[0]">
+    Nothing to see here.<br/>
+    Move along.
+</p>
+
+<div *ngIf="coupons && coupons[0]">
+    <app-coupon *ngFor="let coupon of coupons" [coupon]="coupon" [parent]="parent"></app-coupon>
+</div>

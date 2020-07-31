@@ -1,0 +1,8 @@
+<p *ngIf="!customers || !customers[0]">
+    Nothing to see here.<br/>
+    Move along.
+</p>
+<h3><a routerLink="/add-customer">Add Customer</a></h3>
+<div *ngIf="customers && customers[0]">
+    <app-customer *ngFor="let customer of customers" [customer]="customer" [parent]="parent"></app-customer>
+</div>

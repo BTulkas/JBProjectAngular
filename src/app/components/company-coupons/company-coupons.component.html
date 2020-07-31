@@ -1,0 +1,26 @@
+<div>
+    <span><button (click)="getAll()">All</button></span>
+    
+    <form [formGroup]="priceForm">
+        <input type="number" formControlName="price"/>
+        <button (click)="getPrice()">By Price</button>
+    </form>
+
+    <form [formGroup]="categoryForm">
+        <select id="categorySelect" formControlName="categorySelect">
+            <option *ngFor="let c of categories" value={{c}}>{{c}}</option>
+        </select>
+        <button (click)="getCategory()">By Category</button>
+    </form>
+
+    <button (click)="addCoupon()">Add Coupon</button>
+</div>
+
+<p *ngIf="!coupons || !coupons[0]">
+    Nothing to see here.<br/>
+    Move along.
+</p>
+
+<div *ngIf="coupons && coupons[0]">
+    <app-coupon *ngFor="let coupon of coupons" [coupon]="coupon" [parent]="parent"></app-coupon>
+</div>

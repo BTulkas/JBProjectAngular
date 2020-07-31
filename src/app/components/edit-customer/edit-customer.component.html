@@ -1,0 +1,31 @@
+<div *ngIf="customer">
+    <form [formGroup]="editCustomerForm">
+        <label>ID</label><br/>
+        <input type="number" formControlName="customerId"><br/><br/>
+        
+        <label>First Name</label><br/>
+        <input type="text" formControlName="firstName">
+        <span *ngIf="editCustomerForm.controls['firstName'].invalid && editCustomerForm.controls['firstName'].touched">
+            A man needs a name
+        </span><br/><br/>
+        
+        <label>Last Name</label><br/>
+        <input type="text" formControlName="lastName">
+        <span *ngIf="editCustomerForm.controls['lastName'].invalid && editCustomerForm.controls['lastName'].touched">
+            A man needs a full name
+        </span><br/><br/>
+        
+        <label>Email</label><br/>
+        <input type="email" formControlName="email">
+        <span *ngIf="editCustomerForm.controls['email'].invalid && editCustomerForm.controls['email'].touched">
+            That is not an email
+        </span><br/><br/>
+
+        <label>New Password</label><br/>
+        <input type="password" formControlName="password">
+      
+        
+        <button (click)="updateCustomer()">Save Changes</button><br/><br/>
+        <button (click)="deleteCustomer()">Delete</button>
+    </form>
+</div>

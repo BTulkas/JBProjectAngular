@@ -1,0 +1,11 @@
+<p *ngIf="!companies || !companies[0]">
+    Nothing to see here.<br/>
+    Move along.
+</p>
+<div>
+    <h3><a routerLink="/add-company">Add Company</a></h3>
+</div>
+
+<div *ngIf="companies && companies[0]">
+    <app-company *ngFor="let company of companies" [company]="company" [parent]="parent"></app-company>
+</div>

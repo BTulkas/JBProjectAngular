@@ -1,0 +1,9 @@
+<div>
+    <a routerLink="browse">Home</a>
+    <a *ngIf="!logged()" routerLink="login">Login</a>
+    <a *ngIf="getRole()=='customer'" routerLink="customer-coupons">My Coupons</a>
+    <a *ngIf="getRole()=='company'" routerLink="company-coupons">My Coupons</a>
+    <a *ngIf="getRole()=='admin'" routerLink="companies">Companies</a>
+    <a *ngIf="getRole()=='admin'" routerLink="customers">Customers</a>
+    <button *ngIf="logged()" (click)="logout()">Logout</button>
+</div>

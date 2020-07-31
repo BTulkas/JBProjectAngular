@@ -1,0 +1,47 @@
+<div *ngIf="coupon">
+    <form *ngIf="coupon.company" [formGroup]="editCouponForm">
+        <label>Title</label><br/>
+        <input type="text" formControlName="title">
+        <span *ngIf="editCouponForm.controls['title'].invalid && editCouponForm.controls['title'].touched">
+            Anonymous coupons are hard to buy
+        </span><br/><br/>
+
+        <select id="category" formControlName="category"><br/>
+            <option *ngFor="let c of categories" value={{c}}>{{c}}</option>
+        </select>
+        <span *ngIf="editCouponForm.controls['category'].invalid && editCouponForm.controls['category'].touched">
+            It needs to belong somewhere
+        </span><br/><br/>
+
+        <label>Description</label><br/>
+        <input type="text" formControlName="description"><br/><br/>
+
+        <label>Starts</label><br/>
+        <input type="date" formControlName="startDate"><br/><br/>
+
+        <label>Expires</label><br/>
+        <input type="date" formControlName="endDate">
+        <span *ngIf="editCouponForm.controls['endDate'].invalid && editCouponForm.controls['endDate'].touched">
+            Can't be in the past
+        </span><br/><br/>
+
+        <label>In Stock</label><br/>
+        <input type="number" formControlName="amount">
+        <span *ngIf="editCouponForm.controls['amount'].invalid && editCouponForm.controls['amount'].touched">
+            Give them at least 1
+        </span><br/><br/>
+
+        <label>Price</label><br/>
+        <input type="number" formControlName="price">
+        <span *ngIf="editCouponForm.controls['category'].invalid && editCouponForm.controls['category'].touched">
+            Even if you are just giving them away
+        </span><br/><br/>
+
+        <label>Image URL</label><br/>
+        <input type="text" formControlName="image"><br/><br/>
+
+        <button (click)="updateCoupon()">Save Changes</button><br/><br/>
+        
+    </form>
+    <button (click)="deleteCoupon()">Delete</button>
+</div>
