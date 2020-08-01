@@ -9,8 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BrowseCustomersComponent implements OnInit {
 
+  // Empty list of customers to be initialized
   customers:Customer[];
+  // For use as @Input() in CustomerComponent
   customer:Customer;
+  // For use as @Input() in CustomerComponent
   parent:string='customers'
 
   constructor(
@@ -19,6 +22,7 @@ export class BrowseCustomersComponent implements OnInit {
 
   ngOnInit(): void {
 
+    // Initialize customers list
     this.adminService.getAllCustomers().subscribe(
       newCustomers=>{
         this.customers=newCustomers;

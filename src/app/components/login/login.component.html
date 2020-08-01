@@ -2,9 +2,15 @@
     <form [formGroup]="loginForm">
         <label>Email</label>
         <input type="email" formControlName="email"/>
+        <span *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched">
+            That's not a valid email.
+        </span>
         <br/><br/>
         <label>Password</label>
         <input type="password" formControlName="password">
+        <span *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
+            Can't have a blank password. Try again.
+        </span>
         <br/><br/>
         <label>Login as</label>
         <select id="client" formControlName="client">
@@ -12,6 +18,9 @@
             <option value="Company">Company</option>
             <option value="Administrator">Admin</option>
         </select>
+        <span *ngIf="loginForm.controls['client'].invalid && loginForm.controls['client'].touched">
+            You gotta give us something to work with here.
+        </span>
         <br/><br/>
         <button (click)="login()">Login</button>
     </form>

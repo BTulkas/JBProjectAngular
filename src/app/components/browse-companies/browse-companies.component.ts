@@ -9,8 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BrowseCompaniesComponent implements OnInit {
 
+  // Empty list of companies to be initialized
   companies:Company[];
+  // For use as @input() in CompanyComponent
   company:Company;
+  // For us as @Input() in CompanyComponent
   parent:String="companies"
 
   constructor(
@@ -19,6 +22,7 @@ export class BrowseCompaniesComponent implements OnInit {
 
   ngOnInit(): void {
     
+    // Initialize companies list
     this.adminService.getAllCompanies().subscribe(
       newCompanies=>{
         this.companies=newCompanies;

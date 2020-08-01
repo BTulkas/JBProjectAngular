@@ -3,7 +3,7 @@ import { Company } from './../../models/company.model';
 import { Customer } from './../../models/customer.model';
 import { CategoryType } from './../../models/category-type.enum';
 import { Coupon } from 'src/app/models/coupon';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { CompanyService } from './../../services/company.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -27,14 +27,19 @@ export class AddCouponComponent implements OnInit {
     private router:Router) { }
 
   ngOnInit(): void {
-
+    
+    // Ensures the user is of correct role because component does not come from service
+    if(!(sessionStorage.role == "Company")){
+      alert("Access denied!");
+      this.router.navigate([""]);
+    }
 
     this.addCouponForm = this.fb.group({
       title:["", Validators.required],
       category:["", Validators.required],
       description:[""],
       startDate:["", Validators.required],
-      endDate:["", [Validators.required, ]],
+      endDate:["", [Validators.required, this.valiDate]],
       amount:["", [Validators.required, Validators.min(1)]],
       price:["", [Validators.required, Validators.min(0)]],
       image:[""]
@@ -46,6 +51,7 @@ export class AddCouponComponent implements OnInit {
 
   addCoupon(){
     if(this.addCouponForm.valid){
+      // Constructs coupon object from form
       const coupon:Coupon = new Coupon(
         0,
         this.loggedCompany,
@@ -60,6 +66,8 @@ export class AddCouponComponent implements OnInit {
         this.purchasedBy
         );
         
+
+      // Posts the object to the server
       this.companyService.addCoupon(coupon).subscribe(
         coupon=>{
           alert("Huzza! Added "+ coupon.title);
@@ -71,6 +79,16 @@ export class AddCouponComponent implements OnInit {
         );
     }
     return;
+  }
+
+  
+  // Checks that the coupon endDate is not in the past or before the startDate
+  valiDate(control:AbstractControl){
+    const currentDate: Date = new Date();
+    let expiration: Date = new Date(control.value);
+    let startDate: Date = new Date(this.addCouponForm.controls['startDate'].value);
+    if(currentDate.getTime()>expiration.getTime() || currentDate.getTime() <= startDate.getTime())
+      return {dateError:true};
   }
 
 }

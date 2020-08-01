@@ -1,4 +1,4 @@
-import { LoginExpiredInterceptor } from './interceptors/login-expired.interceptor';
+import { ErrorsInterceptor } from './interceptors/errors.interceptor';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -50,7 +50,7 @@ import { AddCustomerComponent } from './components/add-customer/add-customer.com
     ReactiveFormsModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass:LoginExpiredInterceptor, multi:true}
+    {provide: HTTP_INTERCEPTORS, useClass:ErrorsInterceptor, multi:true}
   ],
   bootstrap: [AppComponent]
 })

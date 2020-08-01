@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     this.isLoggedIn();
 
     this.loginForm = this.fb.group({
-      email: ["", Validators.required],
+      email: ["", [Validators.required, Validators.email]],
       password: ["", Validators.required],
       client: ["", Validators.required]
     });
@@ -36,20 +36,26 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  
+  // Sends login credential to the server
   login(){
-    this.loginService.login(
-      this.loginForm.controls['email'].value,
-      this.loginForm.controls['password'].value,
-      this.loginForm.controls['client'].value)
-    .subscribe(
-      (tokenFromServer)=>{
-        sessionStorage.token = tokenFromServer;
-        sessionStorage.role = this.loginForm.controls['client'].value;
-        this.router.navigate(["browse"]);
-      }, (err)=>{
-        alert("Login failed!");
-      }
-    )
+    if(this.loginForm.valid){
+      this.loginService.login(
+        this.loginForm.controls['email'].value,
+        this.loginForm.controls['password'].value,
+        this.loginForm.controls['client'].value)
+        .subscribe(
+          // Receive token from server and save to session
+          tokenFromServer=>{
+            sessionStorage.token = tokenFromServer;
+            // Saves role to session to match clientType
+            sessionStorage.role = this.loginForm.controls['client'].value;
+            this.router.navigate(["browse"]);
+          }, err=>{
+            alert(err.error);
+          }
+        );
+    }
   }
 
 }

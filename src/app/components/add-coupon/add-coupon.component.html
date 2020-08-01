@@ -17,12 +17,15 @@
         <input type="text" formControlName="description"><br/><br/>
 
         <label>Starts</label><br/>
-        <input type="date" formControlName="startDate"><br/><br/>
+        <input type="date" formControlName="startDate">
+        <span *ngIf="addCouponForm.controls['startDate'].invalid && addCouponForm.controls['startDate'].touched">
+            It needs to start some time
+        </span><br/><br/>
 
         <label>Expires</label><br/>
         <input type="date" formControlName="endDate">
         <span *ngIf="addCouponForm.controls['endDate'].invalid && addCouponForm.controls['endDate'].touched">
-            Can't be in the past
+            Can't be in the past. Or before it even starts.
         </span><br/><br/>
 
         <label>In Stock</label><br/>

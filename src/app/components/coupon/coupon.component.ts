@@ -24,16 +24,21 @@ export class CouponComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  // To expose customer specific features
   isCustomer(){
     if(sessionStorage.getItem('role')=='Customer') return true;
     else return false;
   }
 
+
+  // To expose company specific features
   isCompany(){
     if(sessionStorage.getItem('role')=='Company') return true;
     else return false;
   }
 
+  // Every company's favorit button
   purchase(){
     this.customerService.purchaseCoupon(this.coupon.couponId)
     .subscribe(
@@ -45,6 +50,7 @@ export class CouponComponent implements OnInit {
     )
   }
 
+  // TS router for easier params
   goToEdit(){
     this.router.navigate(["edit-coupon", this.coupon.couponId])
   }

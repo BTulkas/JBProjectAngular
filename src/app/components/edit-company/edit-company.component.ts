@@ -13,6 +13,7 @@ export class EditCompanyComponent implements OnInit {
 
   editCompanyForm:FormGroup;
   company:Company;
+  // To extract company from url param
   compId = this.route.snapshot.params.compId
 
   constructor(
@@ -28,13 +29,17 @@ export class EditCompanyComponent implements OnInit {
       companyId:[{value:"", disabled:true}],
       name:[{value:"", disabled:true}],
       email:["", [Validators.required, Validators.email]],
-      password:["", Validators.required]
+      password:[""]
     });
 
+    
+    // Gets the company to edit via url param
     this.adminService.getOneCompany(this.compId).subscribe(
       comp=>{
+        // Saves the company to class level variable
         this.company=comp;
 
+        // Pre-populates the form fields with the company values
         this.editCompanyForm.controls['companyId'].setValue(comp.companyId),
         this.editCompanyForm.controls['name'].setValue(comp.name),
         this.editCompanyForm.controls['email'].setValue(comp.email)
@@ -44,18 +49,21 @@ export class EditCompanyComponent implements OnInit {
 
   }
 
+
   updateCompany(){
+    
+    // Sets company values to form values
     if(this.editCompanyForm.valid){
       this.company.email = this.editCompanyForm.controls['email'].value;
       
+      // Checks if a new password is given before setting it
       let newPass = this.editCompanyForm.controls['password'].value;
       if(newPass != "")
-      this.company.password = newPass;
+        this.company.password = newPass;
       
-      console.log(this.company);
+      // Sends the modified company to the server
       this.adminService.updateCompany(this.company).subscribe(
         comp=>{
-          console.log(comp);
           alert("Success! "+comp.name+" updated!");
           this.router.navigate(["companies"]);
         },

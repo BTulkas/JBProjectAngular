@@ -9,7 +9,9 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CompanyComponent implements OnInit {
 
+  // Injectable to generate company lists from single component
   @Input() company:Company;
+  // Injectable for special behaviours in parent components
   @Input('parent') parentName:string;
 
   constructor(
@@ -19,6 +21,7 @@ export class CompanyComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // TS router for easier params
   goToEdit(){
     this.router.navigate(["edit-company/", this.company.companyId]);
   }

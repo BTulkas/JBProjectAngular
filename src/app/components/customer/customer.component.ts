@@ -9,7 +9,9 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CustomerComponent implements OnInit {
 
+  // Injectable to generate customers lists from single component
   @Input() customer:Customer;
+  // Injectable for special behaviours in parent components
   @Input('parent') parentName:string;
 
   constructor(
@@ -19,6 +21,7 @@ export class CustomerComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // TS router for easier params
   goToEdit(){
     this.router.navigate(["edit-customer", this.customer.customerId]);
   }

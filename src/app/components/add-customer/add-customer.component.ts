@@ -24,6 +24,13 @@ export class AddCustomerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    // Ensures the user is of correct role because component does not come from service
+    if(!(sessionStorage.role == "Administrator")){
+      alert("Access denied!");
+      this.router.navigate([""]);
+    }
+
     this.addCustomerForm = this.fb.group({
       firstName:["", Validators.required],
       lastName:["", Validators.required],
@@ -35,6 +42,7 @@ export class AddCustomerComponent implements OnInit {
 
   addCustomer(){
     if(this.addCustomerForm.valid){
+      // Constructs the customer object from the form
       const customer:Customer = new Customer(
         0,
         this.addCustomerForm.controls['firstName'].value,
@@ -44,6 +52,7 @@ export class AddCustomerComponent implements OnInit {
         this.coupons
         );
         
+      // Posts the object to the server
       this.adminService.addCustomer(customer).subscribe(
         customer=>{
           alert("Huzza! "+customer.firstName+" "+customer.lastName+" has joined us!");

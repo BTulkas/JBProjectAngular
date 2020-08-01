@@ -24,6 +24,12 @@ export class AddCompanyComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
+    // Ensures the user is of correct role because component does not come from service
+    if(!(sessionStorage.role == "Administrator")){
+      alert("Access denied!");
+      this.router.navigate([""]);
+    }
 
     this.addCompanyForm = this.fb.group({
       name:["", Validators.required],
@@ -35,6 +41,7 @@ export class AddCompanyComponent implements OnInit {
 
   addCompany(){
     if(this.addCompanyForm.valid){
+      // Constructs the company object from the form
       const company:Company = new Company(
         0,
         this.addCompanyForm.controls['name'].value,
@@ -42,7 +49,8 @@ export class AddCompanyComponent implements OnInit {
         this.addCompanyForm.controls['password'].value,
         this.coupons
         );
-        
+      
+      // Posts the object to the server
       this.adminService.addCompany(company).subscribe(
         company=>{
           alert("Huzza! "+company.name+" has been added!");
