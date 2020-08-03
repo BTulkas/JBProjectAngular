@@ -2,7 +2,7 @@ import { CategoryType } from './../../models/category-type.enum';
 import { ClientService } from './../../services/client.service';
 import { Coupon } from './../../models/coupon';
 import { CompanyService } from './../../services/company.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -36,7 +36,7 @@ export class EditCouponComponent implements OnInit {
       category:["", Validators.required],
       description:[""],
       startDate:["", Validators.required],
-      endDate:["", [Validators.required, ]],
+      endDate:["", [Validators.required, this.valiDate]],
       amount:["", [Validators.required, Validators.min(1)]],
       price:["", [Validators.required, Validators.min(0)]],
       image:[""]
@@ -117,5 +117,13 @@ export class EditCouponComponent implements OnInit {
       err=>{alert(err.error)}
     );
   }
+
+    // Checks that the coupon endDate is not in the past
+    valiDate(control:AbstractControl){
+      const currentDate: Date = new Date();
+      let expiration: Date = new Date(control.value);
+      if(currentDate>expiration )
+      return {dateError:true};
+    }
 
 }

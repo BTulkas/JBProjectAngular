@@ -3,7 +3,7 @@ import { Company } from './../../models/company.model';
 import { Customer } from './../../models/customer.model';
 import { CategoryType } from './../../models/category-type.enum';
 import { Coupon } from 'src/app/models/coupon';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import { CompanyService } from './../../services/company.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -82,13 +82,11 @@ export class AddCouponComponent implements OnInit {
   }
 
   
-  // Checks that the coupon endDate is not in the past or before the startDate
+  // Checks that the coupon endDate is not in the past
   valiDate(control:AbstractControl){
     const currentDate: Date = new Date();
     let expiration: Date = new Date(control.value);
-    let startDate: Date = new Date(this.addCouponForm.controls['startDate'].value);
-    if(currentDate.getTime()>expiration.getTime() || currentDate.getTime() <= startDate.getTime())
-      return {dateError:true};
+    if(currentDate>expiration )
+    return {dateError:true};
   }
-
 }

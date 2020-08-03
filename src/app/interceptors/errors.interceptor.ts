@@ -31,11 +31,21 @@ export class ErrorsInterceptor implements HttpInterceptor {
             this.router.navigate(["login"]);
             // Sends the request on for any additional handling in the component
             return next.handle(request);
-            // All other erros will navigate the user one page back
+            
+          } else if(error.status==500){
+            // Generic error because there will be no component to handle it
+            alert("Something went wrong.");
+            this.location.back();
+            // Returns empty request to avoid further or duplicate errors
+            return next.handle(request.clone({body:null}))
+            
+          // Ideally would have made specific handlers for all error behaviours, but deadline
           } else{
+            // All other erros will navigate the user one page back
             // Using location.back() prevents additional handling in offending component, so alert is thrown here
             alert(error.error);
             this.location.back();
+            // This throws a TS error in the browser console for not returning request, but still works
           }
         })
         );

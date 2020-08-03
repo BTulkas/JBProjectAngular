@@ -29,10 +29,14 @@ export class BrowseCouponsComponent implements OnInit {
           this.clientService.getCompanyFromCoupon(c.couponId).subscribe(
             company=>{
               c.company = company;
+            }, err=>{
+              alert(err.error);
             }
           );
         })
         this.coupons = newCoupons;
+      }, err=>{
+        alert(err.error);
       });
   }
 
