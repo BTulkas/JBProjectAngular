@@ -27,7 +27,8 @@ const routes: Routes = [
   {path:"customers", component:BrowseCustomersComponent},
   {path:"add-customer", component:AddCustomerComponent},
   {path:"edit-customer/:custId", component:EditCustomerComponent},
-  {path:"", redirectTo:"browse", pathMatch:"full"}
+  {path:"", redirectTo:"browse", pathMatch:"full"},
+  {path:"**", redirectTo:"browse"}
 ];
 
 @NgModule({
