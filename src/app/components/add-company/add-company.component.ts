@@ -13,7 +13,7 @@ import { Component, OnInit } from '@angular/core';
 export class AddCompanyComponent implements OnInit {
 
   addCompanyForm:FormGroup;
-  // Empty coupon list for custructor
+  // Empty coupon list for constructor
   coupons:Coupon[]=[];
 
 

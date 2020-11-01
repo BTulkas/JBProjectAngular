@@ -11,7 +11,7 @@ export class CompanyComponent implements OnInit {
 
   // Injectable to generate company lists from single component
   @Input() company:Company;
-  // Injectable for special behaviours in parent components
+  // Injectable for special behaviors in parent components
   @Input('parent') parentName:string;
 
   constructor(

@@ -13,7 +13,7 @@ export class CouponComponent implements OnInit {
 
   // Injectable to generate coupon lists from single component
   @Input() coupon:Coupon;
-  // Injectable for special behaviours in parent components
+  // Injectable for special behaviors in parent components
   @Input('parent') parentName:string;
 
   constructor(
@@ -38,7 +38,7 @@ export class CouponComponent implements OnInit {
     else return false;
   }
 
-  // Every company's favorit button
+  // Every company's favorite button
   purchase(){
     this.customerService.purchaseCoupon(this.coupon.couponId)
     .subscribe(
